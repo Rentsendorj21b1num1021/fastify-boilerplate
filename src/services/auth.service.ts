@@ -19,11 +19,11 @@ export async function login(data: LoginInput) {
   if (!valid) throw { statusCode: 401, message: 'Email эсвэл нууц үг буруу' }
 
   const accessToken = jwt.sign({ id: user._id }, config.jwt.secret, {
-    expiresIn: config.jwt.expiresIn,
+    expiresIn: config.jwt.expiresIn as any,
   })
 
   const refreshToken = jwt.sign({ id: user._id }, config.refreshToken.secret, {
-    expiresIn: config.refreshToken.expiresIn,
+    expiresIn: config.refreshToken.expiresIn as any,
   })
 
   user.refreshToken = refreshToken
@@ -46,7 +46,7 @@ export async function refresh(token: string) {
   }
 
   const accessToken = jwt.sign({ id: user._id }, config.jwt.secret, {
-    expiresIn: config.jwt.expiresIn,
+    expiresIn: config.jwt.expiresIn as any,
   })
 
   return { accessToken }
